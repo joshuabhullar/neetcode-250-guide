@@ -16,9 +16,9 @@
 **Topic:** Sliding Window
 
 **Problems:**
-- [ ] 🟢 [Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/) - *Sliding Window*
-- [ ] 🟡 [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) - *Sliding Window*
-- [ ] 🟡 [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) - *Sliding Window*
+- [x] 🟢 [Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/) - *Sliding Window*
+- [x] 🟡 [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) - *Sliding Window*
+- [x] 🟡 [Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) - *Sliding Window*
 
 ## Day 2 - 2026-10-02
 **Topic:** Heap / Priority Queue
