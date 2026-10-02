@@ -54,7 +54,19 @@ The script will prompt you to choose when to start your study plan:
 - **Start next Monday**: Enter `monday` or just press Enter for default
 - **Interactive examples**: The script provides helpful examples and validation
 
-This creates `NeetCode_250_Study_Plan.md` with your personalized study schedule.
+This creates `NeetCode_250_Study_Plan_<start-date>.md` with your personalized study schedule.
+
+### Custom Plan Length
+```bash
+# 90-day plan starting Oct 1, 2026 (3 problems/day for days 1-70, 2/day for days 71-90)
+python3 generate_study_plan.py --days 90 --start 2026-10-01 --seed 3
+```
+
+- `--days N` - spread all 250 problems over N days (default 125). Problems are split as evenly as possible, with heavier days first so the Medium/Hard-heavy final stretch is lighter.
+- `--start DATE` - `YYYY-MM-DD`, `today`, or `monday`; skips the interactive prompt.
+- `--seed N` - reproducible plan.
+
+Difficulty phases scale with the plan length (e.g. for 90 days: Early = days 1-22, Middle = 23-58, Late = 59-90).
 
 
 ## 📁 Files

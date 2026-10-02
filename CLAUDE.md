@@ -28,7 +28,12 @@ This is a NeetCode 250 study plan generator that creates a structured 125-day co
 ```bash
 # Generate the complete 125-day plan
 python3 generate_study_plan.py
+
+# Custom length / start date / reproducible seed
+python3 generate_study_plan.py --days 90 --start 2026-10-01 --seed 3
 ```
+
+`--days` spreads all 250 problems across N days (per-day quota = 250 / N, heavier days first) and scales the difficulty phase boundaries (days 30/80 of 125) proportionally. Output files for non-125-day plans are named `NeetCode_250_Study_Plan_<N>_Days_<start>.md`.
 
 ### Data Inspection
 ```bash
