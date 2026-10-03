@@ -60,11 +60,19 @@ This creates `NeetCode_250_Study_Plan_<start-date>.md` with your personalized st
 ```bash
 # 90-day plan starting Oct 1, 2026 (3 problems/day for days 1-70, 2/day for days 71-90)
 python3 generate_study_plan.py --days 90 --start 2026-10-01 --seed 3
+
+# Roadmap order: finish each topic before moving on (recommended)
+python3 generate_study_plan.py --days 90 --start 2026-10-01 --order roadmap \
+  --output NeetCode_250_Study_Plan_90_Days_2026-10-01.md \
+  --completed "Contains Duplicate" "Valid Anagram" "Two Sum"
 ```
 
 - `--days N` - spread all 250 problems over N days (default 125). Problems are split as evenly as possible, with heavier days first so the Medium/Hard-heavy final stretch is lighter.
 - `--start DATE` - `YYYY-MM-DD`, `today`, or `monday`; skips the interactive prompt.
-- `--seed N` - reproducible plan.
+- `--seed N` - reproducible spaced plan.
+- `--order roadmap|spaced` - `roadmap` walks NeetCode topics top-to-bottom; `spaced` (default) cycles categories.
+- `--completed ...` - problem names to pre-check.
+- `--output FILE` - write/overwrite a specific markdown file.
 
 Difficulty phases scale with the plan length (e.g. for 90 days: Early = days 1-22, Middle = 23-58, Late = 59-90).
 

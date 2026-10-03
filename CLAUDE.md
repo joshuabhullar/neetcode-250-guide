@@ -31,9 +31,14 @@ python3 generate_study_plan.py
 
 # Custom length / start date / reproducible seed
 python3 generate_study_plan.py --days 90 --start 2026-10-01 --seed 3
+
+# Roadmap order (finish each topic before the next) with completed problems checked
+python3 generate_study_plan.py --days 90 --start 2026-10-01 --order roadmap \
+  --output NeetCode_250_Study_Plan_90_Days_2026-10-01.md \
+  --completed "Contains Duplicate" "Valid Anagram" "Two Sum"
 ```
 
-`--days` spreads all 250 problems across N days (per-day quota = 250 / N, heavier days first) and scales the difficulty phase boundaries (days 30/80 of 125) proportionally. Output files for non-125-day plans are named `NeetCode_250_Study_Plan_<N>_Days_<start>.md`.
+`--days` spreads all 250 problems across N days (per-day quota = 250 / N, heavier days first) and scales the difficulty phase boundaries (days 30/80 of 125) proportionally. `--order roadmap` walks categories top-to-bottom (Easy→Medium→Hard within each). Output files for non-125-day plans are named `NeetCode_250_Study_Plan_<N>_Days_<start>.md`.
 
 ### Data Inspection
 ```bash

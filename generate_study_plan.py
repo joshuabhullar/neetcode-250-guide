@@ -14,6 +14,50 @@ from collections import defaultdict, deque
 
 DIFFICULTIES = ['Easy', 'Medium', 'Hard']
 
+# NeetCode roadmap / practice-list order (Arrays → … → Bit Manipulation)
+ROADMAP_CATEGORY_ORDER = [
+    "Arrays & Hashing",
+    "Two Pointers",
+    "Sliding Window",
+    "Stack",
+    "Binary Search",
+    "Linked List",
+    "Trees",
+    "Tries",
+    "Heap / Priority Queue",
+    "Backtracking",
+    "Graphs",
+    "Advanced Graphs",
+    "1-D Dynamic Programming",
+    "2-D Dynamic Programming",
+    "Greedy",
+    "Intervals",
+    "Math & Geometry",
+    "Bit Manipulation",
+]
+
+# Spaced-repetition generator uses a similar early→late difficulty ordering
+SPACED_CATEGORY_ORDER = [
+    "Arrays & Hashing",
+    "Two Pointers",
+    "Sliding Window",
+    "Stack",
+    "Binary Search",
+    "Linked List",
+    "Trees",
+    "Heap / Priority Queue",
+    "Backtracking",
+    "Tries",
+    "Graphs",
+    "Advanced Graphs",
+    "1-D Dynamic Programming",
+    "2-D Dynamic Programming",
+    "Greedy",
+    "Intervals",
+    "Math & Geometry",
+    "Bit Manipulation",
+]
+
 def load_problems():
     """Load all 250 problems from JSON file."""
     with open('neetcode_250_complete.json', 'r', encoding='utf-8') as f:
@@ -186,31 +230,48 @@ def select_problems_for_day(day, quota, selected_category, category_problems, ca
 
     return day_problems
 
-def generate_study_plan(problems, start_date, total_days):
-    """Generate a `total_days`-day plan that includes ALL problems."""
+def flatten_roadmap_problems(problems, category_order):
+    """Return all problems in roadmap category order, Easy → Medium → Hard within each."""
+    category_problems = organize_problems_by_category_and_difficulty(problems)
+    ordered = []
+    for category in category_order:
+        for difficulty in DIFFICULTIES:
+            ordered.extend(category_problems[category][difficulty])
+    return ordered
 
-    # Define category order (from easiest to hardest)
-    category_order = [
-        "Arrays & Hashing",
-        "Two Pointers",
-        "Sliding Window",
-        "Stack",
-        "Binary Search",
-        "Linked List",
-        "Trees",
-        "Heap / Priority Queue",
-        "Backtracking",
-        "Tries",
-        "Graphs",
-        "Advanced Graphs",
-        "1-D Dynamic Programming",
-        "2-D Dynamic Programming",
-        "Greedy",
-        "Intervals",
-        "Math & Geometry",
-        "Bit Manipulation"
-    ]
+def generate_roadmap_plan(problems, start_date, total_days):
+    """
+    Generate a plan that walks the NeetCode roadmap top-to-bottom:
+    finish (or nearly finish) one category before starting the next.
+    """
+    ordered = flatten_roadmap_problems(problems, ROADMAP_CATEGORY_ORDER)
+    quotas = build_daily_quotas(len(ordered), total_days)
+    plan = []
+    index = 0
 
+    for day, quota in enumerate(quotas):
+        day_problems = ordered[index:index + quota]
+        index += quota
+        categories = {p['category'] for p in day_problems}
+        # Prefer the first problem's category as the day topic when mixed
+        # (only happens at category boundaries)
+        if len(categories) == 1:
+            topic = next(iter(categories))
+        else:
+            topic = "Mixed"
+
+        plan.append({
+            'date': (start_date + timedelta(days=day)).strftime('%Y-%m-%d'),
+            'day': day + 1,
+            'problems': day_problems,
+            'category': topic,
+        })
+
+    return plan
+
+def generate_spaced_plan(problems, start_date, total_days):
+    """Generate a `total_days`-day plan with spaced category cycling."""
+    category_order = SPACED_CATEGORY_ORDER
     category_problems = organize_problems_by_category_and_difficulty(problems)
     quotas = build_daily_quotas(len(problems), total_days)
     early_end, middle_end = get_phase_boundaries(total_days)
@@ -251,6 +312,12 @@ def generate_study_plan(problems, start_date, total_days):
         category_usage_history.appendleft(selected_category)
 
     return plan
+
+def generate_study_plan(problems, start_date, total_days, order='spaced'):
+    """Generate a study plan using either spaced cycling or strict roadmap order."""
+    if order == 'roadmap':
+        return generate_roadmap_plan(problems, start_date, total_days)
+    return generate_spaced_plan(problems, start_date, total_days)
 
 def analyze_plan_distribution(plan, total_days):
     """Analyze the distribution of categories and difficulties throughout the plan."""
@@ -302,8 +369,9 @@ def describe_daily_load(plan):
         return f"{segments[0][0]} problems per day for {len(plan)} days"
     return ", ".join(f"{count} problems/day for days {start}-{end}" for count, start, end in segments)
 
-def generate_markdown_plan(plan):
+def generate_markdown_plan(plan, order='spaced', completed=None):
     """Generate markdown for the study plan."""
+    completed = completed or set()
     total_days = len(plan)
     total_problems = sum(len(day['problems']) for day in plan)
     markdown = f"# NeetCode 250 - Complete {total_days}-Day Study Plan (All {total_problems} Problems)\n\n"
@@ -311,11 +379,18 @@ def generate_markdown_plan(plan):
     markdown += "**Enhanced Study Strategy:**\n"
     markdown += f"- {describe_daily_load(plan)} (same category each day when possible)\n"
     markdown += f"- ALL {total_problems} problems included with no gaps\n"
-    markdown += "- Spaced repetition: Categories cycle with intelligent spacing to optimize retention\n"
-    markdown += "- Progressive difficulty: Early days focus on Easy, gradually increasing complexity\n"
-    markdown += "- Category focus: Daily concentration on single topics for deeper pattern recognition\n"
-    markdown += "- Intelligent timing: Easier categories appear earlier, advanced topics later in the plan\n\n"
-    markdown += "---\n\n"
+    if order == 'roadmap':
+        markdown += "- Roadmap order: Finish each NeetCode roadmap topic before moving to the next\n"
+        markdown += "- Within each topic: Easy → Medium → Hard\n"
+        markdown += "- Follows: Arrays & Hashing → Two Pointers → Sliding Window → … → Bit Manipulation\n"
+    else:
+        markdown += "- Spaced repetition: Categories cycle with intelligent spacing to optimize retention\n"
+        markdown += "- Progressive difficulty: Early days focus on Easy, gradually increasing complexity\n"
+        markdown += "- Category focus: Daily concentration on single topics for deeper pattern recognition\n"
+        markdown += "- Intelligent timing: Easier categories appear earlier, advanced topics later in the plan\n"
+    if completed:
+        markdown += f"- Progress: {len(completed)} problem(s) already completed are pre-checked\n"
+    markdown += "\n---\n\n"
 
     for day_plan in plan:
         date = day_plan['date']
@@ -329,7 +404,8 @@ def generate_markdown_plan(plan):
 
         for problem in problems:
             difficulty_emoji = {"Easy": "🟢", "Medium": "🟡", "Hard": "🔴"}[problem['difficulty']]
-            markdown += f"- [ ] {difficulty_emoji} [{problem['name']}]({problem['leetcode_url']}) - *{problem['category']}*\n"
+            checkbox = "[x]" if problem['name'] in completed else "[ ]"
+            markdown += f"- {checkbox} {difficulty_emoji} [{problem['name']}]({problem['leetcode_url']}) - *{problem['category']}*\n"
 
         markdown += "\n"
 
@@ -379,7 +455,13 @@ def parse_args():
     parser.add_argument('--start',
                         help="Start date: YYYY-MM-DD, 'today', or 'monday'. Prompts if omitted.")
     parser.add_argument('--seed', type=int,
-                        help="Random seed for a reproducible plan")
+                        help="Random seed for a reproducible spaced plan")
+    parser.add_argument('--order', choices=['spaced', 'roadmap'], default='spaced',
+                        help="spaced = cycle categories; roadmap = finish each topic in NeetCode order")
+    parser.add_argument('--completed', nargs='*', default=[],
+                        help="Problem names to pre-check as completed")
+    parser.add_argument('--output',
+                        help="Output markdown path (overwrites if present)")
     args = parser.parse_args()
 
     if not 1 <= args.days <= 250:
@@ -395,7 +477,7 @@ def main():
     args = parse_args()
     total_days = args.days
 
-    print(f"🔧 Generating {total_days}-day plan with ALL 250 problems...")
+    print(f"🔧 Generating {total_days}-day plan with ALL 250 problems ({args.order} order)...")
 
     if args.seed is not None:
         random.seed(args.seed)
@@ -407,8 +489,17 @@ def main():
     all_problems = load_problems()
     print(f"📚 Loaded {len(all_problems)} total problems")
 
+    completed = set(args.completed)
+    if completed:
+        known = {p['name'] for p in all_problems}
+        unknown = completed - known
+        if unknown:
+            print(f"⚠️ Unknown completed problem names ignored: {sorted(unknown)}")
+            completed -= unknown
+        print(f"✅ Pre-checking {len(completed)} completed problem(s)")
+
     print(f"\n🗓️ Generating complete plan...")
-    plan = generate_study_plan(all_problems, start_date, total_days)
+    plan = generate_study_plan(all_problems, start_date, total_days, order=args.order)
 
     # Count total problems in plan
     total_problems_in_plan = sum(len(day['problems']) for day in plan)
@@ -423,18 +514,23 @@ def main():
     category_by_phase, difficulty_by_phase, category_progression = analyze_plan_distribution(plan, total_days)
 
     # Generate markdown
-    markdown_content = generate_markdown_plan(plan)
+    markdown_content = generate_markdown_plan(plan, order=args.order, completed=completed)
 
-    # Check if file already exists and find next available filename
-    base_filename = f'NeetCode_250_Study_Plan_{start_date.strftime("%Y-%m-%d")}'
-    if total_days != 125:
-        base_filename = f'NeetCode_250_Study_Plan_{total_days}_Days_{start_date.strftime("%Y-%m-%d")}'
-    filename = f'{base_filename}.md'
-    counter = 1
+    if args.output:
+        filename = args.output
+    else:
+        # Check if file already exists and find next available filename
+        base_filename = f'NeetCode_250_Study_Plan_{start_date.strftime("%Y-%m-%d")}'
+        if total_days != 125:
+            base_filename = f'NeetCode_250_Study_Plan_{total_days}_Days_{start_date.strftime("%Y-%m-%d")}'
+        if args.order == 'roadmap':
+            base_filename += '_Roadmap'
+        filename = f'{base_filename}.md'
+        counter = 1
 
-    while os.path.exists(filename):
-        filename = f'{base_filename}_{counter}.md'
-        counter += 1
+        while os.path.exists(filename):
+            filename = f'{base_filename}_{counter}.md'
+            counter += 1
 
     # Save to file
     with open(filename, 'w', encoding='utf-8') as f:
@@ -450,6 +546,16 @@ def main():
     print(f"  Total problems: {total_problems_in_plan}")
     print(f"  Average problems per day: {total_problems_in_plan / len(plan):.1f}")
     print(f"  Daily load: {describe_daily_load(plan)}")
+
+    # Category progression preview for roadmap plans
+    if args.order == 'roadmap':
+        print(f"\n🗺️ Category Progression (first day of each topic):")
+        seen = set()
+        for day in plan:
+            cat = day['category']
+            if cat != 'Mixed' and cat not in seen:
+                seen.add(cat)
+                print(f"  Day {day['day']}: {cat}")
 
     # Category focus statistics
     same_category_days = sum(1 for day in plan if day.get('category') != 'Mixed')
@@ -484,6 +590,12 @@ def main():
             print(f"  - {problem}")
     else:
         print(f"\n✅ All 250 problems successfully included!")
+
+    checked = sum(
+        1 for day in plan for problem in day['problems'] if problem['name'] in completed
+    )
+    if completed:
+        print(f"✅ Checked off {checked}/{len(completed)} completed problem(s) in the plan")
 
 if __name__ == "__main__":
     main()
