@@ -8,7 +8,7 @@
 - Roadmap order: Finish each NeetCode roadmap topic before moving to the next
 - Within each topic: Easy → Medium → Hard
 - Follows: Arrays & Hashing → Two Pointers → Sliding Window → … → Bit Manipulation
-- Progress: 6 problem(s) already completed are pre-checked
+- Progress: 9 problem(s) already completed are pre-checked
 
 ---
 
@@ -16,7 +16,7 @@
 **Topic:** Arrays & Hashing
 
 **Problems:**
-- [ ] 🟢 [Concatenation of Array](https://leetcode.com/problems/concatenation-of-array/) - *Arrays & Hashing*
+- [x] 🟢 [Concatenation of Array](https://leetcode.com/problems/concatenation-of-array/) - *Arrays & Hashing*
 - [x] 🟢 [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) - *Arrays & Hashing*
 - [x] 🟢 [Valid Anagram](https://leetcode.com/problems/valid-anagram/) - *Arrays & Hashing*
 
@@ -25,7 +25,7 @@
 
 **Problems:**
 - [x] 🟢 [Two Sum](https://leetcode.com/problems/two-sum/) - *Arrays & Hashing*
-- [ ] 🟢 [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) - *Arrays & Hashing*
+- [x] 🟢 [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) - *Arrays & Hashing*
 - [ ] 🟢 [Remove Element](https://leetcode.com/problems/remove-element/) - *Arrays & Hashing*
 
 ## Day 3 - 2026-10-03
@@ -40,7 +40,7 @@
 **Topic:** Arrays & Hashing
 
 **Problems:**
-- [ ] 🟡 [Group Anagrams](https://leetcode.com/problems/group-anagrams/) - *Arrays & Hashing*
+- [x] 🟡 [Group Anagrams](https://leetcode.com/problems/group-anagrams/) - *Arrays & Hashing*
 - [ ] 🟡 [Sort an Array](https://leetcode.com/problems/sort-an-array/) - *Arrays & Hashing*
 - [ ] 🟡 [Sort Colors](https://leetcode.com/problems/sort-colors/) - *Arrays & Hashing*
 
