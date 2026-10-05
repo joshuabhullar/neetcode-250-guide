@@ -8,7 +8,7 @@
 - Roadmap order: Finish each NeetCode roadmap topic before moving to the next
 - Within each topic: Easy → Medium → Hard
 - Follows: Arrays & Hashing → Two Pointers → Sliding Window → … → Bit Manipulation
-- Progress: 9 problem(s) already completed are pre-checked
+- Progress: 12 problem(s) already completed are pre-checked
 
 ---
 
@@ -26,13 +26,13 @@
 **Problems:**
 - [x] 🟢 [Two Sum](https://leetcode.com/problems/two-sum/) - *Arrays & Hashing*
 - [x] 🟢 [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) - *Arrays & Hashing*
-- [ ] 🟢 [Remove Element](https://leetcode.com/problems/remove-element/) - *Arrays & Hashing*
+- [x] 🟢 [Remove Element](https://leetcode.com/problems/remove-element/) - *Arrays & Hashing*
 
 ## Day 3 - 2026-10-03
 **Topic:** Arrays & Hashing
 
 **Problems:**
-- [ ] 🟢 [Majority Element](https://leetcode.com/problems/majority-element/) - *Arrays & Hashing*
+- [x] 🟢 [Majority Element](https://leetcode.com/problems/majority-element/) - *Arrays & Hashing*
 - [ ] 🟢 [Design HashSet](https://leetcode.com/problems/design-hashset/) - *Arrays & Hashing*
 - [ ] 🟢 [Design HashMap](https://leetcode.com/problems/design-hashmap/) - *Arrays & Hashing*
 
@@ -73,7 +73,7 @@
 
 **Problems:**
 - [ ] 🔴 [First Missing Positive](https://leetcode.com/problems/first-missing-positive/) - *Arrays & Hashing*
-- [ ] 🟢 [Reverse String](https://leetcode.com/problems/reverse-string/) - *Two Pointers*
+- [x] 🟢 [Reverse String](https://leetcode.com/problems/reverse-string/) - *Two Pointers*
 - [ ] 🟢 [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) - *Two Pointers*
 
 ## Day 9 - 2026-10-09
