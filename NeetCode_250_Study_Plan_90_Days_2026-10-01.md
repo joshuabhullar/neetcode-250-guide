@@ -8,7 +8,7 @@
 - Roadmap order: Finish each NeetCode roadmap topic before moving to the next
 - Within each topic: Easy → Medium → Hard
 - Follows: Arrays & Hashing → Two Pointers → Sliding Window → … → Bit Manipulation
-- Progress: 12 problem(s) already completed are pre-checked
+- Progress: 15 problem(s) already completed are pre-checked
 
 ---
 
@@ -74,14 +74,14 @@
 **Problems:**
 - [ ] 🔴 [First Missing Positive](https://leetcode.com/problems/first-missing-positive/) - *Arrays & Hashing*
 - [x] 🟢 [Reverse String](https://leetcode.com/problems/reverse-string/) - *Two Pointers*
-- [ ] 🟢 [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) - *Two Pointers*
+- [x] 🟢 [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) - *Two Pointers*
 
 ## Day 9 - 2026-10-09
 **Topic:** Two Pointers
 
 **Problems:**
-- [ ] 🟢 [Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) - *Two Pointers*
-- [ ] 🟢 [Merge Strings Alternately](https://leetcode.com/problems/merge-strings-alternately/) - *Two Pointers*
+- [x] 🟢 [Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) - *Two Pointers*
+- [x] 🟢 [Merge Strings Alternately](https://leetcode.com/problems/merge-strings-alternately/) - *Two Pointers*
 - [ ] 🟢 [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) - *Two Pointers*
 
 ## Day 10 - 2026-10-10
