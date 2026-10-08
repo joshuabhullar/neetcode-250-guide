@@ -8,7 +8,7 @@
 - Roadmap order: Finish each NeetCode roadmap topic before moving to the next
 - Within each topic: Easy → Medium → Hard
 - Follows: Arrays & Hashing → Two Pointers → Sliding Window → … → Bit Manipulation
-- Progress: 15 problem(s) already completed are pre-checked
+- Progress: 18 problem(s) already completed are pre-checked
 
 ---
 
@@ -474,14 +474,14 @@
 **Problems:**
 - [ ] 🔴 [Build a Matrix With Conditions](https://leetcode.com/problems/build-a-matrix-with-conditions) - *Advanced Graphs*
 - [ ] 🔴 [Greatest Common Divisor Traversal](https://leetcode.com/problems/greatest-common-divisor-traversal) - *Advanced Graphs*
-- [ ] 🟢 [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) - *1-D Dynamic Programming*
+- [x] 🟢 [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) - *1-D Dynamic Programming*
 
 ## Day 59 - 2026-11-28
 **Topic:** 1-D Dynamic Programming
 
 **Problems:**
-- [ ] 🟢 [Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/) - *1-D Dynamic Programming*
-- [ ] 🟢 [N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number/) - *1-D Dynamic Programming*
+- [x] 🟢 [Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/) - *1-D Dynamic Programming*
+- [x] 🟢 [N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number/) - *1-D Dynamic Programming*
 - [ ] 🟡 [House Robber](https://leetcode.com/problems/house-robber/) - *1-D Dynamic Programming*
 
 ## Day 60 - 2026-11-29
