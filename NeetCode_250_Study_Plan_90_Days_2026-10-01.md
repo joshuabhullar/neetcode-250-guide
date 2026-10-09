@@ -8,7 +8,7 @@
 - Roadmap order: Finish each NeetCode roadmap topic before moving to the next
 - Within each topic: Easy → Medium → Hard
 - Follows: Arrays & Hashing → Two Pointers → Sliding Window → … → Bit Manipulation
-- Progress: 18 problem(s) already completed are pre-checked
+- Progress: 21 problem(s) already completed are pre-checked
 
 ---
 
@@ -393,14 +393,14 @@
 
 **Problems:**
 - [ ] 🔴 [Word Break II](https://leetcode.com/problems/word-break-ii) - *Backtracking*
-- [ ] 🟢 [Island Perimeter](https://leetcode.com/problems/island-perimeter/) - *Graphs*
-- [ ] 🟢 [Verifying An Alien Dictionary](https://leetcode.com/problems/verifying-an-alien-dictionary/) - *Graphs*
+- [x] 🟢 [Island Perimeter](https://leetcode.com/problems/island-perimeter/) - *Graphs*
+- [x] 🟢 [Verifying An Alien Dictionary](https://leetcode.com/problems/verifying-an-alien-dictionary/) - *Graphs*
 
 ## Day 49 - 2026-11-18
 **Topic:** Graphs
 
 **Problems:**
-- [ ] 🟢 [Find the Town Judge](https://leetcode.com/problems/find-the-town-judge) - *Graphs*
+- [x] 🟢 [Find the Town Judge](https://leetcode.com/problems/find-the-town-judge) - *Graphs*
 - [ ] 🟡 [Number of Islands](https://leetcode.com/problems/number-of-islands/) - *Graphs*
 - [ ] 🟡 [Max Area of Island](https://leetcode.com/problems/max-area-of-island/) - *Graphs*
 
